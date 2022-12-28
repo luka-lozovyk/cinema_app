@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.util.Set;
 
+import static cinema.model.Role.RoleName.ADMIN;
+import static cinema.model.Role.RoleName.USER;
+
 @Component
 public class DataInitializer {
     private final UserService userService;
@@ -22,15 +25,15 @@ public class DataInitializer {
     @PostConstruct
     public void inject() {
         Role adminRole = new Role();
-        adminRole.setRoleName(Role.RoleName.ADMIN);
+        adminRole.setRoleName(ADMIN);
         roleService.add(adminRole);
 
         Role userRole = new Role();
-        userRole.setRoleName(Role.RoleName.USER);
+        userRole.setRoleName(USER);
         roleService.add(userRole);
 
         User user = new User();
-        user.setEmail("auser@gmail.com");
+        user.setEmail("user@gmail.com");
         user.setPassword("user1234");
         user.setRoles(Set.of(userRole));
         userService.add(user);
