@@ -1,6 +1,5 @@
 package cinema.service.impl;
 
-import cinema.model.Role;
 import cinema.model.User;
 import cinema.service.AuthenticationService;
 import cinema.service.RoleService;
@@ -9,6 +8,8 @@ import cinema.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+
+import static cinema.model.Role.RoleName.USER;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -29,7 +30,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
-        user.setRoles(Set.of(roleService.getByName(Role.RoleName.USER.name())));
+        user.setRoles(Set.of(roleService.getByName(USER.name())));
         userService.add(user);
         shoppingCartService.registerNewShoppingCart(user);
         return user;
